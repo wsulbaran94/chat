@@ -1,0 +1,33 @@
+{
+  "name": "tecnical-test",
+  "version": "1.0.0",
+  "description": "create an IRC (Internal Relay Chat)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Red-Valley/tecnical-test.git"
+  },
+  "author": "wsulbaran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Red-Valley/tecnical-test/issues"
+  },
+  "homepage": "https://github.com/Red-Valley/tecnical-test#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.2",
+    "next": "^12.1.4",
+    "node-sass": "^6.0.1",
+    "react": "^18.0.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
