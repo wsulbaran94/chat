@@ -23,7 +23,6 @@ const NavBar = () => {
     return (
 		<div className="navbar-wrapper">
 			<Navbar expand="lg" className=" navbar-dark fj-mw9">
-				Tecnical-Test-IRC
 				<AppLink2
 					href="#" 
 					className="navbar-brand mr-3 font-weight-bold">
