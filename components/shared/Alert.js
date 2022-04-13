@@ -22,24 +22,18 @@ function Alert({ id, fade }) {
     useEffect(() => {
         mounted.current = true;
 
-        // subscribe to new alert notifications
         const subscription = alertService.onAlert(id)
             .subscribe(alert => {
-                // clear alerts when an empty alert is received
                 if (!alert.message) {
                     setAlerts(alerts => {
-                        // filter out alerts without 'keepAfterRouteChange' flag
                         const filteredAlerts = alerts.filter(x => x.keepAfterRouteChange);
                             
-                        // remove 'keepAfterRouteChange' flag on the rest
                         return omit(filteredAlerts, 'keepAfterRouteChange');
                     });
                 } else {
-                    // add alert to array with unique id
                     alert.itemId = Math.random();
                     setAlerts(alerts => ([...alerts, alert]));
 
-                    // auto close alert if required
                     if (alert.autoClose) {
                         setTimeout(() => removeAlert(alert), 3000);
                     }
@@ -47,20 +41,16 @@ function Alert({ id, fade }) {
             });
 
 
-        // clear alerts on location change
         const clearAlerts = () => alertService.clear(id);
         router.events.on('routeChangeStart', clearAlerts);
 
-        // clean up function that runs when the component unmounts
         return () => {
             mounted.current = false;
 
-            // unsubscribe to avoid memory leaks
             subscription.unsubscribe();
             router.events.off('routeChangeStart', clearAlerts);
         };
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function omit(arr, key) {
@@ -74,15 +64,12 @@ function Alert({ id, fade }) {
         if (!mounted.current) return;
 
         if (fade) {
-            // fade out alert
             setAlerts(alerts => alerts.map(x => x.itemId === alert.itemId ? { ...x, fade: true } : x));
 
-            // remove alert after faded out
             setTimeout(() => {
                 setAlerts(alerts => alerts.filter(x => x.itemId !== alert.itemId));
             }, 250);
         } else {
-            // remove alert
             setAlerts(alerts => alerts.filter(x => x.itemId !== alert.itemId));
         }
     };

@@ -10,6 +10,7 @@ import axios from "axios"
 import { get } from '../service/HTTP/HTTP';
 import Paginate from "../components/Paginate";
 import { verifyToken } from "../service/Auth/Auth"
+import { alertService } from "../service/Alert/Alert"
 
 const socket = io("http://localhost:4000/");
 
@@ -70,13 +71,18 @@ const Chat = ({socket, username, room}) => {
 
     const getGiphy = async () => {
         setIsLoading(true);
-        const fetchData = await axios("https://api.giphy.com/v1/gifs/trending", {
-            params: {
-              api_key: "21W55uc1dqNobqkOtluZMLGnvA2hXAyN",
-              limit: 100
-            }
-          });
-        setGiphy(fetchData.data.data);
+        try {
+            const fetchData = await axios("https://api.giphy.com/v1/gifs/trending", {
+                params: {
+                api_key: "21W55uc1dqNobqkOtluZMLGnvA2hXAyN",
+                limit: 100
+                }
+            });
+            setGiphy(fetchData.data.data);
+        } catch (error) {
+            console.error(error)
+        }
+        
     }
 
     const handleSearchChange = event => {
@@ -85,7 +91,6 @@ const Chat = ({socket, username, room}) => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        //setIsError(false);
         setIsLoading(true);
     
         try {
@@ -99,8 +104,6 @@ const Chat = ({socket, username, room}) => {
             setGiphy(fetchData.data.data);
         } catch (err) {
             console.log(err);
-          //setIsError(true);
-          //setTimeout(() => setIsError(false), 4000);
         }
     
         setIsLoading(false);
@@ -175,7 +178,6 @@ const Chat = ({socket, username, room}) => {
 
         const fetchData = async () => {
             const result = await get({subUrl:`chat/history/${room}`});
-            console.log(result.history);
             if (result.history && result.history.length > 0) {
                 setMessageList(result.history);
             }
@@ -272,8 +274,9 @@ const Dashboard = () => {
             const verify = async  (token) => {
                 await verifyToken(token.data[1].token)
                 .catch(error => {
+                    console.log(error.data);
                     if (!error.data[0]) {
-                        //alertService.error(error.data[1]);
+                        alertService.error(error.data[1], {keepAfterRouteChange: true});
                         localStorage.removeItem('user');
                         router.push('login')
                     }
@@ -294,6 +297,7 @@ const Dashboard = () => {
                     type="text"
                     className="form-input"
                     placeholder="Nickname.."
+                    value={username}
                     />
                     <input
                     type="text"

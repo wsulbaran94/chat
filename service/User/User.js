@@ -12,7 +12,7 @@ function register (form) {
     return post(data)
     .then(response => {
         if (response.data[0]) {
-            return response.data[0];
+            return response.data;
         }
     })
     .catch(error => {

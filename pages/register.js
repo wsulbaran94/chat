@@ -1,7 +1,7 @@
 const { useRouter } = require('next/router')
 const { useForm  } = require('react-hook-form')
 const { yupResolver } = require('@hookform/resolvers/yup');
-
+import { alertService } from "../service/Alert/Alert"
 let yup = require('yup');
 
 const userService = require('../service/User/User')
@@ -25,8 +25,9 @@ const Register = () => {
     function onSubmit(user) {
         return userService.register(user)
             .then((success) => {
-                if (success) {
-                   router.push('login');
+                if (success[0]) {
+                    alertService.success(success[1], {keepAfterRouteChange: true})
+                    router.push('login');
                 }
 
             })
@@ -64,6 +65,9 @@ const Register = () => {
                                     {errors.password?.message}
                                 </div>
                             </div>
+                            <h6>
+                                <a href='/login' className="return-a">return to login?.</a>
+                            </h6>
                             <button
                                 type="submit"
                                 disabled={formState.isSubmitting}

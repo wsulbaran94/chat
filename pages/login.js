@@ -64,6 +64,9 @@ const Login = () => {
                                     {errors.password?.message}
                                 </div>
 							</div>
+							<h6>
+								<a href='/register' className='return-a-login'>if you are not registered, click here.</a>
+							</h6>
 							<button
 								type="submit"
 								disabled={formState.isSubmitting}

@@ -37,6 +37,7 @@ function get (data) {
     })
 }
 
+
 function handleError (status, data) {
     if(status == 400) {
         return data
@@ -49,5 +50,5 @@ function handleError (status, data) {
 
 module.exports = {
     post, 
-    get
+    get,
 }

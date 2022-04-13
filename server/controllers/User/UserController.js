@@ -4,7 +4,7 @@ const User = require("../../model/User");
 function create (data) {
     return User.create(data)
         .then((user) => {
-            return [true, user]
+            return [true, 'Success Register!!!']
         })
         .catch((error) => {
             if (error.code == 11000) return [false, `User ${data.nickname} exists...!`]

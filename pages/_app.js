@@ -6,7 +6,6 @@ import NavBar from '../components/shared/Navbar';
 import '../styles/index.scss';
 
 const MyApp = ({Component, pageProps}) => {
-    console.log('Component', Component.name);
 
     const isDashboardPage = () => Component.name === 'Dashboard';
 
