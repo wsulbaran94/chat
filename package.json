@@ -47,5 +47,8 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
   },
-  "cacheDirectories": [".next/cache"]
+  "cacheDirectories": [
+    "node_modules/",
+    ".next/cache/"
+  ]
 }
