@@ -12,7 +12,7 @@ import Paginate from "../components/Paginate";
 import { verifyToken } from "../service/Auth/Auth"
 import { alertService } from "../service/Alert/Alert"
 
-const socket = io("http://localhost:4000/");
+const socket = io(process.env.BASE_URL);
 
 socket.on("connect_error", (err) => {
     console.log(`connect_error due to ${err.message}`);
