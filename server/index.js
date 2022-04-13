@@ -14,7 +14,7 @@ const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
 const { API_PORT } = require('./config/config');
-const port = API_PORT || 3000;
+const port = API_PORT || process.env.PORT;
 
 require("./config/database").connect();
 
