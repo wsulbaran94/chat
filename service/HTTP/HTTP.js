@@ -13,7 +13,7 @@ function post (data) {
         method:'post',
         url:data.subUrl,
         data: data.body,
-        headers: (data.headers) ? data.headers : ''
+        headers: { 'Content-Type': 'application/json'}
     })
     .then((response) => {
         return  response.data

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prod_start": "node server/index.js",
+    "prod": "npm run build && npm run prod_start"
   },
   "repository": {
     "type": "git",

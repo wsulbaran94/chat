@@ -14,7 +14,8 @@ const nextApp = next({ dev })
 const nextHandler = nextApp.getRequestHandler()
 
 const { API_PORT } = process.env;
-const port = process.env.PORT || API_PORT
+const port = API_PORT || 3000;
+
 require("./config/database").connect();
 
 app.use(cors());
