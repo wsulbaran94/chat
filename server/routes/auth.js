@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-
+const { JWT_SECRET } = require('../config/config')
 const { create, find } = require("../controllers/User/UserController");
 const { validateToken } = require("../service/middleware/auth");
 
@@ -52,7 +51,7 @@ router.post('/login', async (req, res) => {
                 user: findUser.nickname,
                 id: findUser._id
             },
-            process.env.JWT_SECRET,
+            JWT_SECRET,
             {
                 expiresIn: "5m"
             }

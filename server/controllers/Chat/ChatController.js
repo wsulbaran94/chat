@@ -12,7 +12,6 @@ async function getRoom (room) {
 
 async function saveHistory (history) {
     const findRoom = await getRoom(history.room);
-    console.log(history);
     const historyData = {
         username: history.username, 
         message: (history.message && history.message.length > 0)? history.message:'',

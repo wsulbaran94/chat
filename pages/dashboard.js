@@ -74,7 +74,7 @@ const Chat = ({socket, username, room}) => {
         try {
             const fetchData = await axios("https://api.giphy.com/v1/gifs/trending", {
                 params: {
-                api_key: "21W55uc1dqNobqkOtluZMLGnvA2hXAyN",
+                api_key: process.env.API_KEY_GIPHY,
                 limit: 100
                 }
             });
@@ -96,7 +96,7 @@ const Chat = ({socket, username, room}) => {
         try {
           const fetchData = await axios("https://api.giphy.com/v1/gifs/search", {
             params: {
-              api_key: "21W55uc1dqNobqkOtluZMLGnvA2hXAyN",
+              api_key: process.env.API_KEY_GIPHY,
               q: search,
               limit: 100
             }
@@ -274,8 +274,8 @@ const Dashboard = () => {
             const verify = async  (token) => {
                 await verifyToken(token.data[1].token)
                 .catch(error => {
-                    console.log(error.data);
-                    if (!error.data[0]) {
+                    console.log(error);
+                    if (error && !error.data[0]) {
                         alertService.error(error.data[1], {keepAfterRouteChange: true});
                         localStorage.removeItem('user');
                         router.push('login')

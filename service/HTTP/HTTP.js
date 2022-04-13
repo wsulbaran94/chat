@@ -1,19 +1,14 @@
 const axios = require('axios');
 
 
-const baseURL = `${process.env.URL}:${process.env.API_PORT}/`;
+const baseURL = process.env.BASE_URL;
 
-axios.create({
-    baseURL,
-    headers: { 'Content-Type': 'application/json'}
-})
 
 function post (data) {
-    return axios({
-        method:'post',
-        url:data.subUrl,
-        data: data.body,
-        headers: { 'Content-Type': 'application/json'}
+    return axios.post(`${baseURL}${data.subUrl}`, data.body, { 
+        headers:  {
+            'Content-Type': 'application/json'
+        }
     })
     .then((response) => {
         return  response.data
@@ -24,10 +19,10 @@ function post (data) {
 }
 
 function get (data) {
-    return axios({
-        method:'get',
-        url:data.subUrl,
-        headers: (data.headers) ? data.headers : ''
+    return axios.get(`${baseURL}${data.subUrl}`, { 
+        headers:  {
+            'Content-Type': 'application/json'
+        }
     })
     .then((response) => {
         return  response.data
