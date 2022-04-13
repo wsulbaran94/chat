@@ -53,7 +53,7 @@ nextApp.prepare().then(() => {
 		return nextHandler(req, res)
 	})
 
-	server.listen(port, (err) => {
+	server.listen(process.env.PORT || 5000, (err) => {
 		if (err) process.exit(0)
 		console.log(`> Ready on http://localhost:${port}`)
 	})
