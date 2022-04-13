@@ -27,7 +27,6 @@ const Chat = ({socket, username, room}) => {
     let setGiphyMessage = "";
 
     const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(25);

@@ -2,8 +2,6 @@ const Chat  = require("../../model/Chat");
 
 
 
-
-
 async function getRoom (room) {
     const findRoom =  await Chat.findOne({room})
 
